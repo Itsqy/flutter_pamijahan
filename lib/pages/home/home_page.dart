@@ -63,14 +63,14 @@ class HomePage extends StatelessWidget {
                             'fulan',
                             style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           )
                         ],
                       ),
-                      // Spacer() ->optional for overflow
+                      // 0() ->optional for overflow
                       SizedBox(width: 56),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,8 +89,8 @@ class HomePage extends StatelessWidget {
                             'RP.100.000,0',
                             style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -114,35 +114,123 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 20),
           Container(
             child: CarouselSlider(
               options: CarouselOptions(
+                height: 90,
                 enlargeCenterPage: true,
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enableInfiniteScroll: true,
-                viewportFraction: 0.7,
+                // viewportFraction: 0.7,
                 autoPlay: true,
                 autoPlayInterval: Duration(seconds: 3),
                 autoPlayAnimationDuration: Duration(milliseconds: 800),
               ),
-              items: ["bau", 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.grey),
-                        child: Text(
-                          ' $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
-                  },
-                );
-              }).toList(),
+              items: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.amber.withOpacity(0.2),
+                        spreadRadius: 7,
+                        blurRadius: 8,
+                        offset: Offset(4, -5),
+                      ),
+                    ],
+                    image: DecorationImage(
+                        image: AssetImage('images/img_konten.jpg'),
+                        fit: BoxFit.fill),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text('judul Konten'),
+                      Text('Isi Konten'),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          )
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              ' karyawan',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            width: MediaQuery.of(context).size.width - 30,
+            height: MediaQuery.of(context).size.width - 30,
+            child: GridView.count(
+              primary: false,
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              childAspectRatio: 0.8,
+              children: <Widget>[
+                buildCard("", "", ""),
+                buildCard("", "", ""),
+                buildCard("", "", ""),
+                buildCard("", "", ""),
+              ],
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget buildCard(String name, String imgPath, String employe) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 15,
+        bottom: 5,
+        left: 3,
+        right: 3,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 6,
+              blurRadius: 7,
+              color: Colors.amber.withOpacity(0.2),
+            ),
+          ],
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('developer'),
+            SizedBox(height: 20),
+            Container(
+              height: 75,
+              width: 75,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/img_person.png'),
+                    fit: BoxFit.contain),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text('Tio'),
+          ],
+        ),
       ),
     );
   }
