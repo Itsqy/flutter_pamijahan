@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -101,6 +102,46 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 26),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              'konten Harian',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 25),
+          Container(
+            child: CarouselSlider(
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                viewportFraction: 0.7,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+              ),
+              items: ["bau", 2, 3, 4, 5].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(color: Colors.grey),
+                        child: Text(
+                          ' $i',
+                          style: TextStyle(fontSize: 16.0),
+                        ));
+                  },
+                );
+              }).toList(),
+            ),
+          )
         ],
       ),
     );
