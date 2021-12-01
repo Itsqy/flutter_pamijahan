@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignInPage extends StatelessWidget {
@@ -20,8 +21,8 @@ class SignInPage extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 36,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xffFD7014),
+                      fontWeight: semiBold,
+                      color: primarycolor,
                     ),
                   ),
                 ),
@@ -32,8 +33,7 @@ class SignInPage extends StatelessWidget {
               Text(
                 'Username',
                 style: GoogleFonts.montserrat(
-                    textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    textStyle: TextStyle(fontSize: 14, fontWeight: semiBold)),
               ),
               SizedBox(
                 height: 4,
@@ -57,8 +57,7 @@ class SignInPage extends StatelessWidget {
               Text(
                 'Password',
                 style: GoogleFonts.montserrat(
-                    textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    textStyle: TextStyle(fontSize: 14, fontWeight: semiBold)),
               ),
               SizedBox(
                 height: 4,
@@ -85,8 +84,8 @@ class SignInPage extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       textStyle: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xffFD7014),
+                    fontWeight: semiBold,
+                    color: primarycolor,
                   )),
                 ),
               ),
@@ -99,14 +98,14 @@ class SignInPage extends StatelessWidget {
                   height: 70,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color(0xffFD7014)),
+                      color: kOrangeColor),
                   child: Center(
                     child: Text(
                       'Masuk',
                       style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: semiBold,
                               color: Colors.white)),
                     ),
                   ),

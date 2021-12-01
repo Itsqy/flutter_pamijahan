@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFD7014),
+      backgroundColor: kOrangeColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,9 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
             Text('Salim.id',
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                    fontSize: 24,
+                    fontWeight: semiBold,
+                    color: kWhitecolor,
+                  ),
                 )),
           ],
         ),

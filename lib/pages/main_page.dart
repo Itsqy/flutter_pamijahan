@@ -5,6 +5,7 @@ import 'package:flutter_application_12/pages/home/home_page.dart';
 import 'package:flutter_application_12/pages/news/news_page.dart';
 import 'package:flutter_application_12/pages/profile/profile_page.dart';
 import 'package:flutter_application_12/pages/salary/salary_page.dart';
+import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainPage extends StatefulWidget {
@@ -47,11 +48,11 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffFD7014),
+        backgroundColor: kOrangeColor,
         title: Text(
           appBarTitle,
           style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
+              textStyle: TextStyle(fontSize: 25, fontWeight: semiBold)),
         ),
         centerTitle: true,
       ),
@@ -71,18 +72,22 @@ class _MainPageState extends State<MainPage>
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Salim',
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                            fontSize: 35,
-                            color: Color(0xff000000),
-                          ))),
-                      Text('Wibu',
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
+                      Text(
+                        'Salim',
+                        style: GoogleFonts.montserrat(
+                          textStyle:
+                              TextStyle(fontSize: 35, color: kBlackColor),
+                        ),
+                      ),
+                      Text(
+                        'Wibu',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
                             fontSize: 19,
-                            color: Color(0xff000000),
-                          ))),
+                            color: kBlackColor,
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],

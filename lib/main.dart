@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_12/pages/Auth/signin_page.dart';
 import 'package:flutter_application_12/pages/home/home_page.dart';
 import 'package:flutter_application_12/pages/main_page.dart';
+import 'package:flutter_application_12/pages/salary/detail_salary_page.dart';
 import 'package:flutter_application_12/pages/splash/splash_screen.dart';
 
 void main() {
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/home-page': (context) => HomePage(),
         '/sign-in': (context) => SignInPage(),
-        '/main-page': (context) => MainPage()
+        '/main-page': (context) => MainPage(),
+        '/detail-salary': (context) => DetailSalary(),
       },
     );
   }
