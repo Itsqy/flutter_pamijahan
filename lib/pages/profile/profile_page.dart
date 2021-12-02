@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/models/login_karyawan.dart';
+import 'package:flutter_application_12/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 35),
       child: Column(
@@ -19,8 +24,10 @@ class ProfilePage extends StatelessWidget {
           Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Syatria'),
-              Text('Back-end dev'),
+              Text(loginKaryawanModel.namaKaryawan!),
+              Text(
+                loginKaryawanModel.status!,
+              ),
             ],
           ),
           SizedBox(height: 20),

@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/models/login_karyawan.dart';
 import 'package:flutter_application_12/pages/home/home_page.dart';
 import 'package:flutter_application_12/pages/news/news_page.dart';
 import 'package:flutter_application_12/pages/profile/profile_page.dart';
 import 'package:flutter_application_12/pages/salary/salary_page.dart';
+import 'package:flutter_application_12/providers/auth_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -46,6 +50,8 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOrangeColor,
@@ -65,7 +71,7 @@ class _MainPageState extends State<MainPage>
               Row(
                 children: <Widget>[
                   CircleAvatar(
-                    radius: 55,
+                    radius: 40,
                     backgroundImage: AssetImage('images/img_profile.png'),
                   ),
                   SizedBox(width: 15),
@@ -73,17 +79,21 @@ class _MainPageState extends State<MainPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Salim',
+                        // 'Salim',
+                        loginKaryawanModel.namaKaryawan!,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           textStyle:
-                              TextStyle(fontSize: 35, color: kBlackColor),
+                              TextStyle(fontSize: 18, color: kBlackColor),
                         ),
                       ),
                       Text(
-                        'Wibu',
+                        //
+                        loginKaryawanModel.status!,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
-                            fontSize: 19,
+                            fontSize: 10,
                             color: kBlackColor,
                           ),
                         ),

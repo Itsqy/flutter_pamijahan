@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/providers/news_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -11,10 +13,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  getInit() async {
+    await Provider.of<BeritaProvider>(context, listen: false).getAllBerita();
+    Timer(Duration(seconds: 5), () => Navigator.pushNamed(context, '/sign-in'));
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () => Navigator.pushNamed(context, '/sign-in'));
+    getInit();
   }
 
   @override

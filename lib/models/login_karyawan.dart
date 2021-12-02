@@ -17,10 +17,10 @@ class LoginKaryawanModel {
   factory LoginKaryawanModel.fromjson(Map<String, dynamic> json) {
     return LoginKaryawanModel(
       id: json['id'],
-      idJabatan: json['id_Jabatan'],
+      idJabatan: json['id_jabatan'],
       namaKaryawan: json['nama_karyawan'],
       status: json['status'],
-      tanggalMasuk: json['tanggal_Masuk'],
+      tanggalMasuk: json['tanggal_masuk'],
       nomorHp: json['nomor_hp'],
     );
   }
@@ -28,7 +28,7 @@ class LoginKaryawanModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'idJabatan': idJabatan,
+      'id_jabatan': idJabatan,
       'nama_karyawan': namaKaryawan,
       'status': status,
       'nomor_hp': nomorHp,

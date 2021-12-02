@@ -1,12 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/loading_button.dart';
+import 'package:flutter_application_12/providers/auth_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController usernameController =
+      TextEditingController(text: '');
+
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleLogin() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        username: usernameController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/main-page');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: kOrangeColor,
+            content: Text(
+              'gagal login',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -46,6 +91,7 @@ class SignInPage extends StatelessWidget {
                     border: Border.all(color: Colors.grey)),
                 child: Center(
                   child: TextFormField(
+                    controller: usernameController,
                     decoration:
                         InputDecoration.collapsed(hintText: 'Tulis Sini Bang'),
                   ),
@@ -70,6 +116,7 @@ class SignInPage extends StatelessWidget {
                     border: Border.all(color: Colors.grey)),
                 child: Center(
                   child: TextFormField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration.collapsed(
                         hintText: 'Password Sini Bang'),
@@ -91,25 +138,25 @@ class SignInPage extends StatelessWidget {
               ),
               SizedBox(height: 40),
               InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/main-page');
-                },
-                child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: kOrangeColor),
-                  child: Center(
-                    child: Text(
-                      'Masuk',
-                      style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                              fontSize: 18,
-                              fontWeight: semiBold,
-                              color: Colors.white)),
-                    ),
-                  ),
-                ),
+                onTap: handleLogin,
+                child: isLoading
+                    ? LoadingButton()
+                    : Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: kOrangeColor),
+                        child: Center(
+                          child: Text(
+                            'Masuk',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: semiBold,
+                                    color: Colors.white)),
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),

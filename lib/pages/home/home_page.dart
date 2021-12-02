@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/models/login_karyawan.dart';
+import 'package:flutter_application_12/providers/auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
+
     return Container(
       child: ListView(
         children: <Widget>[
@@ -60,7 +66,8 @@ class HomePage extends StatelessWidget {
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'fulan',
+                            // 'fulan',
+                            loginKaryawanModel.namaKaryawan!,
                             style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                 fontSize: 13,

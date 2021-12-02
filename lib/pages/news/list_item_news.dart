@@ -4,11 +4,13 @@ class ListItemNews {
   String? title;
   String? author;
   String? date;
+  String? content;
 
   ListItemNews({
     required this.imgPath,
     required this.title,
     required this.author,
-    required this.date
+    required this.date,
+    required this.content
   });
 }
