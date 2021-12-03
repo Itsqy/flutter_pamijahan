@@ -44,10 +44,11 @@ Widget listItem(BeritaModel itemNews) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Icon(Icons.person),
                           Text(itemNews.penerbit!),
-                          SizedBox(width: 60),
+                          // SizedBox(width: 10),
                           Icon(Icons.date_range),
                           Text(itemNews.tanggalTerbit!)
                         ],

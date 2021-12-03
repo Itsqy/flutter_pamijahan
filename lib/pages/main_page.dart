@@ -7,6 +7,7 @@ import 'package:flutter_application_12/pages/news/news_page.dart';
 import 'package:flutter_application_12/pages/profile/profile_page.dart';
 import 'package:flutter_application_12/pages/salary/salary_page.dart';
 import 'package:flutter_application_12/providers/auth_provider.dart';
+import 'package:flutter_application_12/providers/theme_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -52,6 +53,14 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
+
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
+    final colorDark =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.amberAccent
+            : kOrangeColor;
+    bool isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kOrangeColor,
@@ -83,8 +92,7 @@ class _MainPageState extends State<MainPage>
                         loginKaryawanModel.namaKaryawan!,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
-                          textStyle:
-                              TextStyle(fontSize: 18, color: kBlackColor),
+                          textStyle: TextStyle(fontSize: 18, color: colorDark),
                         ),
                       ),
                       Text(
@@ -94,7 +102,7 @@ class _MainPageState extends State<MainPage>
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 10,
-                            color: kBlackColor,
+                            color: colorDark,
                           ),
                         ),
                       ),
@@ -109,32 +117,55 @@ class _MainPageState extends State<MainPage>
               ListTile(
                 leading: Icon(
                   Icons.help_center_rounded,
-                  color: Color(0xffFD7014),
+                  color: colorDark,
                 ),
-                title: Text(
-                  'Tentang Kami',
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                    color: Color(0xffFD7014),
-                  )),
-                ),
+                title: isDarkMode
+                    ? Text(
+                        'Tentang Kami',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: colorDark,
+                        )),
+                      )
+                    : Text(
+                        'Tentang Kami',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: kBlackColor,
+                        )),
+                      ),
                 onTap: () {},
               ),
               ListTile(
-                leading: Icon(
-                  Icons.dark_mode_rounded,
-                  color: Color(0xff000000),
-                ),
-                title: Text(
-                  'Dark Mode',
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                    color: Color(0xff000000),
-                  )),
-                ),
+                leading: isDarkMode
+                    ? Icon(
+                        Icons.dark_mode_outlined,
+                        color: colorDark,
+                      )
+                    : Icon(
+                        Icons.light_mode_outlined,
+                        color: Color(0xFF0D47A1),
+                      ),
+                title: isDarkMode
+                    ? Text(
+                        'Dark Mode',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.amberAccent,
+                        )),
+                      )
+                    : Text(
+                        'Light Mode ',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Color(0xff000000),
+                        )),
+                      ),
                 trailing: CupertinoSwitch(
-                  value: true,
-                  onChanged: (value) {},
+                  value: themeProvider.isDarkMode,
+                  onChanged: (value) {
+                    themeProvider.toogleTheme(value);
+                  },
                 ),
               ),
             ],

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_12/models/login_karyawan.dart';
 import 'package:flutter_application_12/providers/auth_provider.dart';
+import 'package:flutter_application_12/providers/theme_provider.dart';
+import 'package:flutter_application_12/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,6 +11,11 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : primarycolor;
+
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
     return Container(

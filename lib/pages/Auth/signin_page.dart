@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_12/loading_button.dart';
 import 'package:flutter_application_12/providers/auth_provider.dart';
+import 'package:flutter_application_12/providers/theme_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,11 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.amber
+            : primarycolor;
+
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleLogin() async {
@@ -67,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                     textStyle: TextStyle(
                       fontSize: 36,
                       fontWeight: semiBold,
-                      color: primarycolor,
+                      color: color,
                     ),
                   ),
                 ),
@@ -78,7 +84,8 @@ class _SignInPageState extends State<SignInPage> {
               Text(
                 'Username',
                 style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(fontSize: 14, fontWeight: semiBold)),
+                    textStyle: TextStyle(
+                        fontSize: 14, fontWeight: semiBold, color: color)),
               ),
               SizedBox(
                 height: 4,
@@ -103,7 +110,8 @@ class _SignInPageState extends State<SignInPage> {
               Text(
                 'Password',
                 style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(fontSize: 14, fontWeight: semiBold)),
+                    textStyle: TextStyle(
+                        fontSize: 14, fontWeight: semiBold, color: color)),
               ),
               SizedBox(
                 height: 4,
@@ -132,7 +140,7 @@ class _SignInPageState extends State<SignInPage> {
                       textStyle: TextStyle(
                     fontSize: 15,
                     fontWeight: semiBold,
-                    color: primarycolor,
+                    color: color,
                   )),
                 ),
               ),

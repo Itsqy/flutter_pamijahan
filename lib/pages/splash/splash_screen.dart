@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_12/providers/konten_provider.dart';
 import 'package:flutter_application_12/providers/news_provider.dart';
+import 'package:flutter_application_12/providers/salary_provider.dart';
+import 'package:flutter_application_12/providers/theme_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +18,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   getInit() async {
     await Provider.of<BeritaProvider>(context, listen: false).getAllBerita();
+    await Provider.of<KontenProvider>(context, listen: false).getAllKonten();
+    await Provider.of<SalaryProvider>(context, listen: false).getPenggajian();
     Timer(Duration(seconds: 5), () => Navigator.pushNamed(context, '/sign-in'));
   }
 
@@ -26,8 +31,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : primarycolor;
+
     return Scaffold(
-      backgroundColor: kOrangeColor,
+      backgroundColor: color,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 60),
-            Text('Salim.id',
+            Text('Salary.id',
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
                     fontSize: 24,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_12/pages/salary/detail_salary_page.dart';
+import 'package:flutter_application_12/providers/salary_provider.dart';
 import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SalaryPage extends StatefulWidget {
   const SalaryPage({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class SalaryPage extends StatefulWidget {
 class _SalaryPageState extends State<SalaryPage> {
   @override
   Widget build(BuildContext context) {
+    SalaryProvider salaryProvider = Provider.of<SalaryProvider>(context);
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -40,9 +43,14 @@ class _SalaryPageState extends State<SalaryPage> {
               children: <Widget>[
                 Text('1'),
                 SizedBox(width: 15),
-                Text('Nama Lengkap'),
+                Text(
+                  salaryProvider.data.namaKaryawan!,
+                ),
                 SizedBox(width: 15),
-                Text('data'),
+                Text(
+                  'data',
+                  // salaryProvider.data.idJabatan!,
+                ),
                 Spacer(),
                 IconButton(
                   onPressed: () {

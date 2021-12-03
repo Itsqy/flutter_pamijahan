@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_12/models/konten.dart';
 import 'package:flutter_application_12/models/login_karyawan.dart';
 import 'package:flutter_application_12/providers/auth_provider.dart';
+import 'package:flutter_application_12/providers/konten_provider.dart';
+import 'package:flutter_application_12/providers/theme_provider.dart';
+import 'package:flutter_application_12/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +18,12 @@ class HomePage extends StatelessWidget {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     LoginKaryawanModel loginKaryawanModel = authProvider.loginKaryawanModel;
 
+    KontenProvider kontenProvider = Provider.of<KontenProvider>(context);
+    List<KontenModel> listKonten = kontenProvider.kontenModel;
+    final color =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : primarycolor;
     return Container(
       child: ListView(
         children: <Widget>[
@@ -40,7 +51,7 @@ class HomePage extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
+                    color: color,
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 5,
@@ -124,45 +135,55 @@ class HomePage extends StatelessWidget {
           SizedBox(height: 20),
           Container(
             child: CarouselSlider(
-              options: CarouselOptions(
-                height: 90,
-                enlargeCenterPage: true,
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enableInfiniteScroll: true,
-                // viewportFraction: 0.7,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-              ),
-              items: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.amber.withOpacity(0.2),
-                        spreadRadius: 7,
-                        blurRadius: 8,
-                        offset: Offset(4, -5),
-                      ),
-                    ],
-                    image: DecorationImage(
-                        image: AssetImage('images/img_konten.jpg'),
-                        fit: BoxFit.fill),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text('judul Konten'),
-                      Text('Isi Konten'),
-                    ],
-                  ),
+                options: CarouselOptions(
+                  height: 90,
+                  enlargeCenterPage: true,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: true,
+                  // viewportFraction: 0.7,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
                 ),
-              ],
-            ),
+                items: listKonten
+                    .map(
+                      (konten) => Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.amber.withOpacity(0.2),
+                              spreadRadius: 7,
+                              blurRadius: 8,
+                              offset: Offset(4, -5),
+                            ),
+                          ],
+                          image: DecorationImage(
+                              image: AssetImage('images/img_konten.jpg'),
+                              fit: BoxFit.fill),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              // 'judul Konten',
+                              konten.judulKonten!,
+                              maxLines: 2,
+                            ),
+                            Text(
+                              // 'Isi Konten',
+                              konten.isiKonten!,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList()),
           ),
           SizedBox(height: 20),
           Padding(
@@ -188,10 +209,10 @@ class HomePage extends StatelessWidget {
               mainAxisSpacing: 16,
               childAspectRatio: 0.8,
               children: <Widget>[
-                buildCard("", "", ""),
-                buildCard("", "", ""),
-                buildCard("", "", ""),
-                buildCard("", "", ""),
+                buildCard("", "", "", context),
+                buildCard("", "", "", context),
+                buildCard("", "", "", context),
+                buildCard("", "", "", context),
               ],
             ),
           ),
@@ -200,7 +221,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildCard(String name, String imgPath, String employe) {
+  Widget buildCard(
+      String name, String imgPath, String employe, BuildContext context) {
+    final color =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : primarycolor;
     return Padding(
       padding: EdgeInsets.only(
         top: 15,
@@ -218,7 +244,7 @@ class HomePage extends StatelessWidget {
               color: Colors.amber.withOpacity(0.2),
             ),
           ],
-          color: Colors.white,
+          color: color,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
